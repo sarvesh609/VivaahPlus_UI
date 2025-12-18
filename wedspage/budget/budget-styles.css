@@ -1,0 +1,62 @@
+/* Budget/budget-styles.css */
+
+/* Define theme colors as variables (Crucial since this is a separate file) */
+:root {
+    /* Use your actual primary and secondary colors if different */
+    --bs-primary: #e53935; /* Example Red */ 
+    --bs-secondary: #00bcd4; /* Example Teal */
+}
+
+/* Style the card header for a premium look */
+.card-header {
+    border-bottom: 3px solid var(--bs-secondary); 
+}
+
+/* Ensure the table is compact and clear */
+.budget-table th, 
+.budget-table td {
+    padding: 12px 15px;
+    font-size: 0.95rem;
+}
+
+.budget-table th {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* Styles for the Quality Star Rating */
+.quality-stars i {
+    font-size: 1rem;
+    margin-right: 1px;
+    vertical-align: middle;
+}
+
+/* Custom styling for the GST badge */
+.budget-table .badge.bg-light {
+    color: #333 !important;
+    font-weight: 500;
+    border: 1px solid #ddd;
+}   
+
+/* Add this to Budget/budget-styles.css */
+
+.budget-value-col {
+    min-width: 150px; 
+    display: inline-block;
+    text-align: left; 
+    font-size: 20px;
+}
+
+.budget-value {
+    font-size: 20px;
+}
+
+.grand-total{
+    font-family: "Domine", serif;
+}
+
+/* .grand-total {
+  font-family: "DM Serif Text", serif;
+  font-weight: 400;
+  font-style: normal;
+} */

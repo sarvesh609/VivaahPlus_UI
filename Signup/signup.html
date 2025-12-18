@@ -1,0 +1,65 @@
+<div class="modal-content p-3 border-0 shadow-lg">
+    <div class="modal-body text-center p-4">
+        <h5 class="fw-bold mb-4">
+            Create Your Profile
+        </h5>
+        
+        <form id="signupForm">
+
+            <div class="mb-3 text-start">
+                <label class="form-label small fw-bold">Gender</label>
+                <div class="btn-group w-100" role="group" id="genderGroup">
+                    <input type="radio" class="btn-check" name="gender" id="genderMale" value="Male" required>
+                    <label class="btn btn-outline-secondary" for="genderMale">Male</label>
+
+                    <input type="radio" class="btn-check" name="gender" id="genderFemale" value="Female" required>
+                    <label class="btn btn-outline-secondary" for="genderFemale">Female</label>
+
+                    <input type="radio" class="btn-check" name="gender" id="genderTrans" value="Trans" required>
+                    <label class="btn btn-outline-secondary" for="genderTrans">Trans</label>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6 text-start">
+                    <label for="firstName" class="form-label small fw-bold">First Name</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="First Name" required>
+                    <div class="invalid-feedback" id="errorFirstName"></div>
+                </div>
+                <div class="col-md-6 text-start">
+                    <label for="lastName" class="form-label small fw-bold">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
+                    <div class="invalid-feedback" id="errorLastName"></div>
+                </div>
+            </div>
+
+            <div class="mb-3 text-start">
+                <label for="mobileNumber" class="form-label small fw-bold">Mobile Number</label>
+                <input type="tel" class="form-control" id="mobileNumber" placeholder="Enter Mobile number" maxlength="10" required>
+                <div class="invalid-feedback" id="errorMobileNumber"></div>
+            </div>
+
+            <div class="mb-3 text-start">
+                <label for="emailId" class="form-label small fw-bold">Email ID</label>
+                <input type="email" class="form-control" id="emailId" placeholder="Enter valid Email" required>
+                <div class="invalid-feedback" id="errorEmailId"></div>
+            </div>
+
+            <div class="mb-4 text-start">
+                <label for="signupPassword" class="form-label small fw-bold">Password</label>
+                <input type="password" class="form-control" id="signupPassword" placeholder="Enter a Password" required>
+                <div class="invalid-feedback" id="errorSignupPassword"></div>
+            </div>
+            
+            <div class="d-grid gap-2">
+                 <button type="submit" class="btn btn-primary btn-lg fw-bold">Register</button>
+            </div>
+
+        </form>
+    </div>
+    
+    <div class="modal-footer justify-content-center border-0 pt-0">
+        <span class="small text-muted">Already have an account? </span>
+        <a href="#" class="signup fw-bold" data-bs-target="#loginModal" data-bs-toggle="modal">Login Here</a>
+    </div>
+</div>

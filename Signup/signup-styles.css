@@ -1,0 +1,30 @@
+/* signup/signup-styles.css */
+
+/* Custom styling for the gender selection buttons */
+#genderGroup .btn-outline-secondary {
+    /* Use a neutral/theme color for the outline */
+    border-color: #ced4da;
+    color: #6c757d;
+}
+
+#genderGroup .btn-check:checked + .btn-outline-secondary {
+    /* Style when a gender is selected */
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+    color: white;
+    box-shadow: none;
+}
+
+/* Ensure validation error text is red and visible */
+.invalid-feedback {
+    display: none; /* By default, hide Bootstrap's invalid feedback */
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: var(--bs-danger); /* Ensure it's red */
+}
+
+/* Override Bootstrap's default display: none for manual display */
+.is-invalid + .invalid-feedback {
+    display: block; /* Show the error text when the input has the 'is-invalid' class */
+}

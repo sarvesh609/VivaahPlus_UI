@@ -1,0 +1,16 @@
+/* our-story/story-styles.css */
+
+/* Custom height for a visually appealing story modal */
+.modal-dialog.modal-lg {
+    max-width: 800px;
+}
+
+/* Ensure the heart icon in the title matches the primary color */
+.modal-header .bi-heart-fill {
+    color: white; 
+}
+
+/* Optional: Improve readability of the story text */
+.story-content p {
+    line-height: 1.8;
+}

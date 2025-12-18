@@ -1,0 +1,27 @@
+/* Custom styles for the About page */
+
+/* Ensure the body has padding for the fixed navbar */
+body {
+    padding-top: 70px;
+}
+
+/* About Page Hero Header */
+.about-hero {
+    /* Use a simple, elegant image related to planning */
+    background: linear-gradient(rgba(255, 107, 107, 0.6), rgba(255, 87, 87, 0.6)), 
+                url('https://picsum.photos/1920/600?random=8&query=elegant+wedding+sketch');
+    background-size: cover;
+    background-position: center;
+    height: 40vh; /* Shorter than the homepage hero */
+    
+    /* Ensure text is above the dark background */
+    color: white; 
+}
+
+/* Reusing the scroll animation styles (from style.css via linking) */
+
+/* Example: Slightly enhancing team profile look */
+#team img {
+    border: 5px solid var(--bs-primary); /* Border using your theme color */
+    object-fit: cover;
+}

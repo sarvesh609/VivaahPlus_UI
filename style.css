@@ -1,0 +1,135 @@
+:root {
+    --bs-primary: #e53935;
+    --bs-secondary: #00bcd4; 
+    --bs-primary-rgb: 255, 87, 87;
+    --bs-light-subtle: #f8f9fa;
+}
+
+/* Overriding Bootstrap Variables for Theme */
+.text-primary { 
+    color: var(--bs-primary) !important; 
+    font-size: 32px;
+}
+
+.text-secondary{
+    color: var(--bs-secondary) !important; 
+    font-size: 38px;
+}
+
+.btn-primary { 
+    background-color: var(--bs-primary); 
+    border-color: var(--bs-primary);
+}
+.btn-primary:hover { 
+    background-color: #ff5757; 
+    border-color: #ff5757;
+}
+
+.btn-secondary { 
+    background-color: var(--bs-secondary); 
+    border-color: var(--bs-secondary);
+}
+.btn-secondary:hover { 
+    background-color: #6cc1cc; 
+    border-color: #6cc1cc;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    font-size: 14px;
+}
+
+.nav-item a:hover {
+    text-decoration: underline;
+}
+
+.heart {
+    color: var(--bs-primary) !important; 
+    font-size: 3rem; 
+}
+
+/* Adjustments for Fixed Navbar */
+body {
+    padding-top: 70px; /* Space below fixed navbar */
+}
+
+.custom-navbar {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    background-color: white !important;
+}
+
+/* Hero Carousel Styling */
+.custom-carousel-height {
+    height: 100vh; /* Ensures the carousel takes up the full screen height */
+}
+
+.carousel-item {
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    /* This creates the dark overlay for white text readability */
+    background-color: rgba(0, 0, 0, 0.4);
+    background-blend-mode: darken;
+}
+
+.carousel-caption {
+    /* Centers the text vertically */
+    bottom: 50%; 
+    transform: translateY(50%);
+}
+
+/* Scroll Animation Styles */
+.animate-on-scroll {
+    opacity: 0;
+    transition: all 0.8s ease-out;
+    transform: translateY(30px); /* Start slightly below */
+}
+
+.animate-on-scroll.active {
+    opacity: 1;
+    transform: translateY(0); /* Move to final position */
+}
+
+/* Ensures the button maintains the brand color on focus/active states */
+.btn-primary:focus,
+.btn-primary:active {
+    box-shadow: 0 0 0 0.25rem rgba(229, 57, 53, 0.5) !important;
+    border-color: var(--bs-primary) !important;
+    background-color: var(--bs-primary) !important; 
+}
+
+/* style.css: Add this animation section */
+
+/* Base State (Hidden, before scroll) */
+.animate-on-scroll {
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1); /* Smoother transition */
+}
+
+/* 1. Slide In from Left */
+.animate-on-scroll.slide-in-left {
+    transform: translateX(-100px);
+}
+
+/* 2. Slide In from Right */
+.animate-on-scroll.slide-in-right {
+    transform: translateX(100px);
+}
+
+/* 3. Fade In Up (Default/existing style improved) */
+.animate-on-scroll.fade-in-up {
+    transform: translateY(40px);
+}
+
+/* 4. Zoom In (For a dramatic effect) */
+.animate-on-scroll.zoom-in {
+    transform: scale(0.8);
+}
+
+/* Active State (Visible, after scroll) - Applies to ALL animations */
+.animate-on-scroll.active {
+    opacity: 1;
+    transform: none; /* Resets position/scale to normal */
+}

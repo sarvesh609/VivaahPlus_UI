@@ -1,0 +1,54 @@
+/* login/login-styles.css */
+.logo-image-container {
+    text-align: center; /* Centers the image */
+    margin-bottom: 25px; /* Adds space below the logo */
+}
+
+.login-logo-img {
+    max-width: 180px; /* Adjust this value (in pixels) to set the size of the image */
+    height: auto; /* Maintains aspect ratio */
+}
+
+/* Enhancing the OR separator */
+.login-separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #6c757d; /* text-muted color */
+    margin: 1rem 0;
+}
+
+.login-separator::before,
+.login-separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #dee2e6; /* light gray line */
+}
+
+.login-separator:not(:empty)::before {
+    margin-right: .5em;
+}
+
+.login-separator:not(:empty)::after {
+    margin-left: .5em;
+}
+
+.forgot{
+    font-size: 16px;
+    color: #00a0b5;
+    text-decoration: none;
+}
+
+.forgot:hover{
+    text-decoration: underline;
+}
+
+.signup{
+    font-size: 16px;
+    color: #00a0b5;
+    text-decoration: none;
+}
+
+.signup:hover {
+    text-decoration: underline;
+}

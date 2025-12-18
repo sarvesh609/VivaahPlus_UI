@@ -1,0 +1,291 @@
+/* Wedspage/wedspage-styles.css */
+
+/* --- Unique Dashboard Button Style (Item 3) --- */
+.nav-link.dashboard-btn {
+    /* Base style from your primary color */
+    background-color: var(--bs-primary);
+    color: white !important;
+    border-radius: 50px; /* Pill shape */
+    padding: 8px 20px;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.nav-link.dashboard-btn:hover {
+    background-color: #ff5757; /* Darker primary on hover */
+    transform: translateY(-1px);
+    text-decoration: none;
+}
+
+/* --- Single Image Hero Style (Item 4) --- */
+.custom-hero {
+    height: 90vh; 
+    background-image: url('../images/Wedspage_main.jpg');
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+/* Overlay for text readability (similar to homepage) */
+.custom-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0.65) 
+    );
+}
+
+.custom-hero-content {
+    position: relative;
+    z-index: 2; /* Ensures text is above the overlay */
+}
+
+.quote1-main{
+    font-family: "Tangerine", cursive;
+    font-size: 56px;
+    color: #b4004e;
+    text-align: center;
+}
+
+.quote1-sub {
+    font-family: "Quintessential", serif;
+    font-size: 30px;
+    text-align: center;
+}
+
+.cards-title {
+    font-family: sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 32px;
+    color: #222;
+}
+
+.margin-huge {
+    margin-bottom: 7rem !important; /* Forces a large margin below the text */
+}
+
+/* --- FLIP CARD STYLES --- */
+
+.flip-card-container {
+    width: 90%; 
+    margin: 0 auto; /* Center the card within the column space */
+    aspect-ratio: 3 / 4; 
+    perspective: 1000px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+/* Flip action triggered by JS */
+.flip-card-container.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    top: 0;          
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+    display: flex; /* Centers content on the back */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* FRONT SIDE: IMAGE & GO BUTTON */
+.flip-card-front {
+    /* 2. Proper image on it (covers the whole card) */
+    background-size: cover;
+    background-position: center;
+    position: relative; 
+}
+
+/* GO Button inside the card (Curved Design) */
+.go-button {
+    position: absolute;
+    bottom: 15px;
+    background-color: var(--bs-secondary); 
+    color: white;
+    font-weight: bold;
+    padding: 8px 25px;
+    border-radius: 999px; /* Curved button */
+    font-size: 14px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    z-index: 5; 
+    cursor: pointer; /* Makes it look clickable */
+}
+
+/* BACK SIDE: Details */
+.flip-card-back {
+    background-color: white;
+    color: black;
+    transform: rotateY(180deg);
+}
+
+/* CARD IMAGES (Using random placeholders) */
+.card-image-1 { background-image: url('../images/Outfit_postcard.jpg'); }
+.card-image-2 { background-image: url('../images/Venue_postcard.jpg'); }
+.card-image-3 { background-image: url('../images/Event_postcard.jpg'); }
+.card-image-4 { background-image: url('../images/Hotel_postcard.jpg'); }
+
+.dashboard-summary {
+    /* Ensures space between the hero/countdown and this new section */
+    padding-top: 40px; 
+}
+
+/* Base Card Styling (Optional: Use to override Bootstrap defaults) */
+.card {
+    border-radius: 1rem; /* More rounded corners */
+}
+
+/* Progress Ring (Feature 1) */
+.progress-ring-container {
+    width: 120px;
+    height: 120px;
+}
+
+.progress-ring {
+    width: 100%;
+    height: 100%;
+    display: block; 
+}
+
+.progress-ring-bg {
+    fill: none;
+    stroke: #e9ecef; /* Light gray background */
+    stroke-width: 12;
+}
+
+.progress-ring-bar {
+    fill: none;
+    stroke: var(--bs-secondary); /* Uses your secondary color */
+    stroke-width: 12;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.8s ease-in-out; /* Smooth animation */
+}
+
+.progress-text {
+    fill: var(--bs-primary); /* Uses your primary color */
+    font-size: 1.6rem;
+    font-family: inherit;
+    font-weight: 700;
+}
+
+/* --- NEW SERVICE STATUS LIST STYLES --- */
+.service-status-list {
+    padding-left: 0; /* Remove default list padding */
+}
+
+/* Ensure consistent spacing and sizing for list badges */
+.service-status-list .badge {
+    min-width: 80px; /* Give the badges a minimum width for alignment */
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Ensure the total cost column has enough space */
+.budget-table .text-end:last-child {
+    min-width: 150px; 
+}
+/* Custom styling for the discount method badge */
+.budget-table .badge.bg-light {
+    color: #333 !important;
+    font-weight: 500;
+    border: 1px solid #ddd;
+}
+
+/* Custom styles for the Invitation Card feature */
+
+.card-invitation-feature {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-image: url('../images/Invitation_card_proxy.png');
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* background-color: rgb(255, 255, 255); */
+}
+
+.card-invitation-feature:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+#viewTimelineBtn {
+    padding: 10px 30px; 
+    letter-spacing: 0.5px;
+}
+
+.card-invitation-feature .bi-envelope-paper {
+    font-size: 3rem !important;
+}
+
+.alert-header-text {
+    color: var(--bs-primary) !important; 
+    font-weight: 700;
+}
+
+#alertsList .list-group-item {
+    border: none;
+    padding-left: 0;
+}
+
+#alertsList .list-group-item span {
+    color: inherit;
+}
+
+/* Budget List Tweaks */
+.list-group-item {
+    border: none;
+}
+
+/* --- DECORATIVE STYLES (Static Clock Image) --- */
+.wedding-animation-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.static-clock-image {
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/wedding-clock-face.png'); 
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%; /* Optional: Makes the image container perfectly round */
+}
+
+/* --- COUNTDOWN UNIT STYLES (Keep existing) --- */
+.countdown-unit {
+    text-align: center;
+    min-width: 80px;
+}
+.countdown-unit h1 {
+    line-height: 1;
+}
