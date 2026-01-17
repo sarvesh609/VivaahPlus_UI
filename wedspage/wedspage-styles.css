@@ -138,7 +138,11 @@
     z-index: 5; 
     cursor: pointer; /* Makes it look clickable */
 }
+/*6cc1cc*/
 
+.go-button:hover{
+    background-color: #6cc1cc;
+}
 /* BACK SIDE: Details */
 .flip-card-back {
     background-color: white;
@@ -195,13 +199,18 @@
     font-weight: 700;
 }
 
-/* --- NEW SERVICE STATUS LIST STYLES --- */
-.service-status-list {
-    padding-left: 0; /* Remove default list padding */
+.service-status-dot{
+    font-size: 6px;
+}
+
+.service-status-list{
+    font-size: small;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* Ensure consistent spacing and sizing for list badges */
-.service-status-list .badge {
+.service-status .badge {
     min-width: 80px; /* Give the badges a minimum width for alignment */
     text-align: center;
     font-weight: 600;
@@ -211,7 +220,7 @@
 .budget-table .text-end:last-child {
     min-width: 150px; 
 }
-/* Custom styling for the discount method badge */
+/* Custom styling for the discunt method badge */
 .budget-table .badge.bg-light {
     color: #333 !important;
     font-weight: 500;

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vivaah + | The Couture Gallery</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="outfit-styles.css">
+    <link rel="stylesheet" href="../../fonts.css">
+</head>
+<body>
+
+    <header class="outfit-hero">
+        <div class="container">
+            <!-- <a href="../wedspage.html" class="btn btn-outline-light mt-3">Back to Dashboard</a> -->
+             <div class="d-flex justify-content-end">
+                <a href="../wedspage.html" class="btn btn-outline-light mt-3">Back to Dashboard</a>
+            </div>
+            <h1 class="display-3 fw-bold">The Couture Gallery</h1>
+            <p class="lead">Hand-picked elegance for your most special day</p>
+        </div>
+    </header>
+
+<div class="container pb-5">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card filter-card p-4 sticky-top" style="top: 20px;">
+                <h5 class="mb-4 text-center">Curate Your Look</h5>
+                
+                <div class="mb-4">
+                    <label class="small fw-bold d-block mb-2 text-uppercase" style="letter-spacing: 1px;">Category</label>
+                    <div class="btn-group w-100" role="group" id="genderFilterGroup">
+                        <button type="button" class="btn btn-outline-danger active" data-value="bride">Bride</button>
+                        <button type="button" class="btn btn-outline-danger" data-value="groom">Groom</button>
+                    </div>
+                    <input type="hidden" id="genderFilter" value="bride">
+                </div>
+
+                <div class="mb-4">
+                    <label class="small fw-bold">OUTFIT TYPE</label>
+                    <select id="typeFilter" class="form-select border-0 bg-light">
+                        <option value="all">Loading...</option>
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label class="small fw-bold">COLOR</label>
+                    <select id="colorFilter" class="form-select border-0 bg-light">
+                        <option value="all">Loading...</option>
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label class="small fw-bold">SIZE</label>
+                    <select id="sizeFilter" class="form-select border-0 bg-light">
+                        <option value="all">All Size</option>
+                        <option value="S">Small (S)</option>
+                        <option value="M">Medium (M)</option>
+                        <option value="L">Large (L)</option>
+                        <option value="XL">Extra Large (XL)</option>
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label class="small fw-bold">COST / RANGE: <span id="costValueDisplay">₹2,00,000</span></label>
+                    <input type="range" class="form-range" min="20000" max="200000" step="5000" id="costRange" value="200000">
+                </div>
+
+                <button class="btn btn-danger w-100 fw-bold py-2 mb-2" id="applyFiltersBtn">
+                    APPLY CHANGES
+                </button>
+
+                <button class="btn btn-outline-secondary fw-bold w-100 btn-sm" id="resetFiltersBtn">
+                    Reset All
+                </button>
+
+                <button class="btn btn-outline-danger w-100 btn-sm mt-2" id="resetSelectionsBtn">
+                    Reset Selections
+                </button>
+            </div>
+        </div>
+
+        <div class="col-lg-9">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <h3 class="fw-bold">Discover Collections</h3>
+                <button class="btn btn-dark px-4 py-2 shadow" id="viewSelectedBtn">
+                    <i class="bi bi-bag-check me-2"></i> Selected (<span id="selectedCount">0</span>)
+                </button>
+            </div>
+
+            <div class="row outfit-gallery" id="outfitGallery">
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="outfit-script.js"></script>
+</body>
+</html>

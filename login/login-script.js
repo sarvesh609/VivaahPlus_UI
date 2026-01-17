@@ -1,5 +1,3 @@
-// login/login-script.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const loginModal = document.getElementById('loginModal');
     const loginModalDialog = document.getElementById('loginModalDialog');
@@ -32,26 +30,49 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Function to attach the form submission logic (Existing logic)
     const attachFormHandler = () => {
         const loginForm = document.getElementById('loginForm');
-        // We ensure loginModal is accessible if needed, though we will redirect
 
         if (loginForm) {
-            loginForm.addEventListener('submit', function(event) {
+            loginForm.addEventListener('submit', async function(event) {
                 event.preventDefault(); 
                 
-                // 1. SIMULATION: Assume successful login
-                alert('Login successful!');
-                
-                // 2. NEW: Redirect the user to the new dashboard page
-                window.location.href = 'wedspage/wedspage.html'; // <<< THIS IS THE CRITICAL CHANGE
-                
-                // Note: The modal hide logic is removed as the page navigates away.
+                // 1. Grab inputs from your login.html
+                const emailId = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+
+                try {
+                    // 2. Send request to Render
+                    const response = await fetch('https://vivaahplus-backend.onrender.com/api/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ emailId, password })
+                    });
+
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        alert(`Welcome back, ${result.user.firstName}!`);
+                        
+                        // Save the ID properly in localStorage
+                        localStorage.setItem('loggedInUser', JSON.stringify({
+                            id: result.user.id, // This matches the new server response
+                            firstName: result.user.firstName,
+                            lastName: result.user.lastName, // ADD THIS LINE
+                            email: result.user.email
+                        }));
+                        window.location.href = 'wedspage/wedspage.html'; 
+                    } else {
+                        alert(result.message);  // Show error from backend (e.g., "Invalid password")
+                    }
+                } catch (error) {
+                    console.error("Login Error:", error);
+                    alert("Could not connect to the server.");
+                }
             });
         }
     };
     
     // 3. NEW Function to attach the close button logic
     const attachCloseHandler = () => {
-        // We look for the button with class 'btn-close' inside the dynamically loaded content
         const closeButton = loginModalDialog.querySelector('.btn-close');
 
         if (closeButton) {
@@ -70,7 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!isContentLoaded) {
                 loadLoginContent();
             } else {
-                // If already loaded, ensure form and close handlers are active (safe practice)
                 attachFormHandler(); 
                 attachCloseHandler();
             }

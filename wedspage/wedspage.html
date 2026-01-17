@@ -153,21 +153,31 @@
         <section class="container my-5 dashboard-summary">
             <div class="row g-4">
                 <div class="col-lg-6">
-                    <div class="card p-4 h-100 shadow-sm border-0">
-                        <h5 class="card-title fw-bold text-dark mb-4"><i class="bi bi-check2-circle me-2 text-secondary"></i>Overall Progress</h5>
-                        
+                    <div class="card shadow-sm border-0 mb-4 p-4">
+                        <h5 class="card-title fw-bold text-dark mb-4">
+                            <i class="bi bi-check2-circle me-2 text-secondary"></i>Overall Progress
+                        </h5>
+
                         <div class="row g-3">
                             <div class="col-6 border-end">
                                 <div class="d-flex flex-column align-items-center justify-content-center h-100">
                                     <div class="progress-ring-container mb-2">
                                         <svg class="progress-ring" viewBox="0 0 120 120">
-                                            <circle class="progress-ring-bg" cx="60" cy="60" r="54"></circle>
-                                            <circle class="progress-ring-bar" cx="60" cy="60" r="54" id="progressRingBar" stroke-dasharray="339.29" stroke-dashoffset="339.29"></circle>
-                                            <text class="progress-text fw-bold" x="60" y="60" text-anchor="middle" dominant-baseline="central" id="progressPercentage">0%</text>
+                                            <circle class="progress-ring-bg" cx="60" cy="60" r="54" 
+                                                    fill="transparent" stroke="#e9ecef" stroke-width="8"></circle>
+                                            <circle class="progress-ring-bar" cx="60" cy="60" r="54" 
+                                                    id="progressRingBar" fill="transparent" stroke="#007bff" 
+                                                    stroke-width="8" stroke-dasharray="339.29" 
+                                                    stroke-dashoffset="339.29" stroke-linecap="round"
+                                                    style="transition: stroke-dashoffset 0.5s ease; transform: rotate(-90deg); transform-origin: 50% 50%;">
+                                            </circle>
+                                            <text class="progress-text fw-bold" x="60" y="60" text-anchor="middle" 
+                                                dominant-baseline="central" id="progressPercentage" 
+                                                fill="#333" style="font-size: 20px;">0%</text>
                                         </svg>
                                     </div>
                                     <p class="mb-0 text-muted small">Tasks Completed</p>
-                                    <h4 class="fw-bold text-primary" id="tasksCompleted">0 / 0</h4>
+                                    <h4 class="fw-bold text-primary" id="tasksCompleted">0 / 4</h4>
                                 </div>
                             </div>
 
@@ -175,12 +185,26 @@
                                 <h6 class="fw-bold text-dark small mb-3">
                                     <i class="bi bi-snow me-2"></i>Core Service Status :
                                 </h6>
-                                <ul class="list-unstyled service-status-list" id="serviceStatusList">
-                                    <li class="small text-muted mb-2">Loading...</li>
+                               <ul id="serviceStatusList">
+                                    <li class="text-muted mb-2 d-flex service-status-list">
+                                        <span class="core-service-names"><i class="bi bi-circle-fill me-2 text-dark service-status-dot" id="outfitDot"></i>Outfits :</span>
+                                        <span id="outfitStatusLabel" class="service-status">Pending</span>
+                                    </li>
+                                    <li class="text-muted mb-2 d-flex service-status-list">
+                                        <span><i class="bi bi-circle-fill me-2 text-dark service-status-dot" id="venueDot"></i>Venues :</span>
+                                        <span id="venueStatusLabel" class="service-status">Pending</span>
+                                    </li>
+                                    <li class="text-muted mb-2 d-flex service-status-list">
+                                        <span><i class="bi bi-circle-fill me-2 text-dark service-status-dot" id="eventDot"></i>Events :</span>
+                                        <span id="eventStatusLabel" class="service-status">Pending</span>
+                                    </li>
+                                    <li class="text-muted mb-2 d-flex service-status-list">
+                                        <span><i class="bi bi-circle-fill me-2 text-dark service-status-dot" id="hotelDot"></i>Hotels :</span>
+                                        <span id="hotelStatusLabel" class="service-status">Pending</span>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
@@ -190,7 +214,7 @@
                         <div class="mt-3">
                             <p class="mb-1 text-muted small">Remaining Budget</p>
                             <h1 class="fw-bolder" id="budgetRemaining">₹ 0</h1>
-                            <hr class="my-2">
+                            <hr class="my-2">   
                             <div class="d-flex justify-content-between small text-muted">
                                 <span class="fw-medium">Total Budget: <span id="budgetTotal" class="fw-bold">₹ 0</span></span>
                                 <!-- <button class="btn btn-m btn-secondary mt-3">View Full Budget</button> -->
@@ -212,7 +236,7 @@
                         <!-- <p class="small text-muted mb-3">Design, select, and send physical or online cards to your guest list.</p> -->
                         <button class="btn btn-secondary w-50 fw-bold mt-2" id="viewTimelineBtn">
                             Design Wedding Invitation Card <i class="bi bi-arrow-right-circle-fill ms-2"></i>
-                        </button> 
+                        </button>
                     </div>
                 </div>
                 <div class="col-lg-4">

@@ -1,0 +1,213 @@
+/* outfits/outfit-styles.css */
+:root {
+    --gold: #c5a059;
+    --deep-red: #8e1e1e;
+    --soft-cream: #fdfaf5;
+}
+
+body {
+    background-color: var(--soft-cream);
+    /* Subtle Mandala/Floral Pattern Background */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z" fill="%23c5a059" opacity="0.03"/></svg>');
+    font-family: 'Playfair Display', serif;
+}
+
+/* --- Hero Section --- */
+.outfit-hero {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../../images/outfits_main.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 60px 0;
+    color: white;
+    text-align: center;
+    border-bottom: 5px solid var(--gold);
+    margin-bottom: 40px;
+}
+
+/* --- Sidebar & Buttons --- */
+.filter-card {
+    background: white;
+    border: 1px solid rgba(197, 160, 89, 0.3);
+    border-radius: 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    font-family: "Domine", serif;
+}
+
+.filter-card h5 {
+    color: var(--deep-red);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: "Bungee Spice", sans-serif;
+
+}
+
+/* Update these rules in outfit-styles.css */
+
+/* 1. Styling for the Category Button Group container */
+#genderFilterGroup .btn-outline-danger {
+    border-color: var(--deep-red);
+    color: var(--deep-red);
+    border-radius: 0; /* Keeps the square luxury look */
+    font-weight: 600;
+    transition: none; /* Removes transition for a static feel */
+}
+
+/* 2. ONLY the active button gets the background color */
+#genderFilterGroup .btn-outline-danger.active {
+    background-color: var(--deep-red);
+    color: white;
+    border-color: var(--deep-red);
+}
+
+/* 3. Disable hover effect: This keeps the button transparent when hovering over the "other" option */
+#genderFilterGroup .btn-outline-danger:hover:not(.active) {
+    background-color: transparent !important;
+    color: var(--deep-red) !important;
+    border-color: var(--deep-red) !important;
+    cursor: pointer;
+}
+
+/* Ensure no blue outline/shadow appears on click */
+#genderFilterGroup .btn-outline-danger:focus {
+    box-shadow: none !important;
+}
+
+.btn-danger {
+    background-color: var(--deep-red);
+    border-color: var(--deep-red);
+    border-radius: 0;
+    transition: all 0.3s;
+}
+
+.btn-danger:hover {
+    background-color: #5a1313;
+    border-color: #5a1313;
+    transform: translateY(-2px);
+}
+
+.btn-outline-secondary {
+    border-radius: 0;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+/* --- Outfit Gallery & Cards --- */
+.animate-fade-in {
+    animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.outfit-card {
+    background: white;
+    border: 1px solid #eee;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    height: 100%;
+}
+
+.outfit-card:hover {
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+}
+
+/* .outfit-card.selected {
+    border: 3px solid #8B4513 !important; 
+    box-shadow: 0 10px 20px rgba(139, 69, 19, 0.2);
+} */
+
+.outfit-card.selected {
+    border-color: var(--deep-red);
+    background: #fff9f9;
+    box-shadow: 0 0 0 3px var(--gold);
+}
+
+/* Image Presentation */
+.img-wrapper {
+    width: 100%;
+    height: 380px;
+    overflow: hidden;
+    background: #f8f8f8;
+    margin-bottom: 15px;
+}
+
+.img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.outfit-card:hover .img-wrapper img {   
+    transform: scale(1.08);
+}
+
+/* Selection Indicator */
+.selection-indicator {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--gold); /* Brown theme color */
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0; /* Hidden by default */
+    transition: 0.3s;
+    z-index: 2;
+    font-size: 1.2rem;
+}
+
+.outfit-card.selected .selection-indicator {
+    opacity: 1;
+    transform: scale(1.1);
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+}
+
+/* --- Typography & Info --- */
+.outfit-info {
+    padding: 10px 0;
+    text-align: center;
+}
+
+.outfit-category {
+    font-size: 0.75rem;
+    color: var(--gold);
+    letter-spacing: 1px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.outfit-name {
+    font-weight: 700;
+    margin: 5px 0;
+    color: var(--deep-red);
+}
+
+.outfit-price {
+    color: var(--deep-red);
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.outfit-gallery {
+    font-family: "Domine", serif;   
+}

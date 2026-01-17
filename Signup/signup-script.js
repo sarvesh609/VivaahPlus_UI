@@ -1,5 +1,3 @@
-// signup/signup-script.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const signupModal = document.getElementById('signupModal');
     const signupModalDialog = document.getElementById('signupModalDialog');
@@ -12,15 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const validateName = (input, errorElementId) => {
         const value = input.value.trim();
         const errorElement = document.getElementById(errorElementId);
-        // CHANGED: Removed \s to disallow spaces
-        const namePattern = /^[a-zA-Z]+$/; 
+        const namePattern = /^[a-zA-Z]+$/;  
 
         if (value === "") {
             input.classList.remove('is-invalid');
             return true;
         } else if (!namePattern.test(value)) {
             input.classList.add('is-invalid');
-            // UPDATED ERROR MESSAGE
             errorElement.textContent = "Only alphabetic characters are allowed, no spaces."; 
             return false;
         } else {
@@ -52,7 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const validateEmail = (input) => {
         const value = input.value.trim();
         const errorElement = document.getElementById('errorEmailId');
-        // CHANGED: The regex now explicitly checks for no spaces at the start/end and no whitespace in the middle
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
 
         if (value === "") {
@@ -60,7 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return true;
         } else if (value.includes(' ') || !emailPattern.test(value)) { // ADDED explicit check for space
             input.classList.add('is-invalid');
-            // UPDATED ERROR MESSAGE
             errorElement.textContent = "Please enter a valid email address with no spaces."; 
             return false;
         } else {
@@ -110,11 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         return isValid;
     };
-
-// ... rest of the script ...
     
     // --- Modal Loading and Handler Attachment ---
-
     const attachHandlers = () => {
         const form = document.getElementById('signupForm');
         if (!form) return;
@@ -144,27 +135,61 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
         
-        // Form Submission Handler
-        form.addEventListener('submit', function(event) {
-            event.preventDefault(); 
-            
-            // Run all validations on submit
-            const isFirstNameValid = validateName(firstNameInput, 'errorFirstName');
-            const isLastNameValid = validateName(lastNameInput, 'errorLastName');
-            const isMobileValid = validateMobile(mobileNumberInput);
-            const isEmailValid = validateEmail(emailIdInput);
-            const isPasswordValid = validatePassword(passwordInput);
-            const isGenderSelected = form.elements['gender'].value !== "";
+    // Form Submission Handler
+    form.addEventListener('submit', async function(event) {
+        event.preventDefault(); 
+        
+        // 1. Run your existing validations
+        const isFirstNameValid = validateName(firstNameInput, 'errorFirstName');
+        const isLastNameValid = validateName(lastNameInput, 'errorLastName');
+        const isMobileValid = validateMobile(mobileNumberInput);
+        const isEmailValid = validateEmail(emailIdInput);
+        const isPasswordValid = validatePassword(passwordInput);
+        const genderValue = form.elements['gender'].value;
 
-            // If all fields are valid, submit the form
-            if (isFirstNameValid && isLastNameValid && isMobileValid && isEmailValid && isPasswordValid && isGenderSelected) {
-                alert('Sign up successful.');
-                const modalInstance = bootstrap.Modal.getInstance(signupModal);
-                modalInstance.hide();
-            } else {
-                alert('Please correct the highlighted errors before submitting.');
+        // 2. If valid, send to Backend
+        if (isFirstNameValid && isLastNameValid && isMobileValid && isEmailValid && isPasswordValid && genderValue) {
+            
+            // Prepare the data object
+            const userData = {
+                gender: genderValue,
+                firstName: firstNameInput.value,
+                lastName: lastNameInput.value,
+                mobileNumber: mobileNumberInput.value,
+                emailId: emailIdInput.value,
+                password: passwordInput.value
+            };
+
+            try {
+                // REPLACE with your actual Render URL
+                const response = await fetch('https://vivaahplus-backend.onrender.com/api/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(userData)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert('Registration successful! Redirecting to login...');
+                    form.reset(); 
+                    const inputs = form.querySelectorAll('.form-control');
+                    inputs.forEach(input => input.classList.remove('is-invalid'));
+                    const modalInstance = bootstrap.Modal.getInstance(signupModal);
+                    if (modalInstance) {
+                        modalInstance.hide();
+                    }
+                } else {
+                    alert(result.message); // Shows "Email already registered" from backendx
+                }
+            } catch (error) {
+                console.error("Signup Error:", error);
+                alert("Could not connect to the server.");
             }
-        });
+        } else {
+            alert('Please correct the highlighted errors before submitting.');
+        }
+    });
     };
     
     // Function to Load Content from signup.html
@@ -207,13 +232,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (loginModal && signupTriggerFromLogin) {
         signupTriggerFromLogin.addEventListener('click', (event) => {
             event.preventDefault();
-            // Hide the login modal
             const loginModalInstance = bootstrap.Modal.getInstance(loginModal);
             if (loginModalInstance) {
                 loginModalInstance.hide();
             }
-            // Show the signup modal (Bootstrap handles the actual display based on data-bs-target)
-            // No need to manually call .show() here as Bootstrap handles the data attributes on the link
         });
     }
 });

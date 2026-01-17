@@ -1,5 +1,3 @@
-// our-story/story-script.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const storyModal = document.getElementById('storyModal');
     const storyModalDialog = document.getElementById('storyModalDialog');
@@ -9,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Function to Load Content from story.html
     const loadStoryContent = async () => {
         try {
-            const response = await fetch('story.html');
+            const response = await fetch('story/story.html');
             if (!response.ok) {
                 throw new Error('Failed to load story content.');
             }

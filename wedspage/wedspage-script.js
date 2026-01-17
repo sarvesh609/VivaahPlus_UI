@@ -1,5 +1,3 @@
-// Wedspage/wedspage-script.js - Updated with Dynamic Modal Logic & Help Modal Loader
-
 document.addEventListener("DOMContentLoaded", function () {
     const cards = document.querySelectorAll(".flip-card-container");
     
@@ -19,90 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // --- TEMPLATES FOR DYNAMIC SERVICE CONTENT (keep existing templates here) ---
     const templates = {
-        // ... (Your existing 'outfitCard', 'venueCard', etc. templates go here)
-        outfitCard: {
-            title: "Plan Your Wedding Outfits",
-            content: `
-                <div class="row g-0">
-                    <div class="col-lg-3 bg-light p-4 border-end">
-                        <h6 class="fw-bold mb-3 text-primary">Outfit Filters</h6>
-                        <div class="mb-3">
-                            <label class="form-label small">Color Preference</label>
-                            <select class="form-select form-select-sm">
-                                <option>Red/Gold</option>
-                                <option>Pastel Pink</option>
-                                <option>Royal Blue</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small">Designer/Style</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="traditional">
-                                <label class="form-check-label small" for="traditional">Traditional</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="contemporary">
-                                <label class="form-check-label small" for="contemporary">Contemporary</label>
-                            </div>
-                        </div>
-                        <div class="d-grid mt-4">
-                            <button class="btn btn-sm btn-outline-primary">Apply Filters</button>
-                        </div>
-                    </div>
-                    <div class="col-lg-9 p-4">
-                        <h6 class="text-muted mb-3">Showing 8 Top Matches</h6>
-                        <div class="row g-3">
-                            <div class="col-md-4"><img src="https://picsum.photos/400/300?random=11" class="img-fluid rounded shadow-sm" alt="Outfit 1"></div>
-                            <div class="col-md-4"><img src="https://picsum.photos/400/300?random=12" class="img-fluid rounded shadow-sm" alt="Outfit 2"></div>
-                            <div class="col-md-4"><img src="https://picsum.photos/400/300?random=13" class="img-fluid rounded shadow-sm" alt="Outfit 3"></div>
-                            <div class="col-md-4"><img src="https://picsum.photos/400/300?random=14" class="img-fluid rounded shadow-sm" alt="Outfit 4"></div>
-                        </div>
-                    </div>
-                </div>
-            `
-        },
-        venueCard: {
-            title: "Find and Shortlist Venues",
-            content: `
-                <div class="row g-0">
-                    <div class="col-lg-3 bg-light p-4 border-end">
-                        <h6 class="fw-bold mb-3 text-primary">Venue Filters</h6>
-                        <div class="mb-3">
-                            <label class="form-label small">Guest Capacity</label>
-                            <input type="number" class="form-control form-control-sm" placeholder="Minimum 250">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small">Type of Venue</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="venueType" id="indoor">
-                                <label class="form-check-label small" for="indoor">Indoor Banquet</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="venueType" id="outdoor">
-                                <label class="form-check-label small" for="outdoor">Outdoor Lawn/Farmhouse</label>
-                            </div>
-                        </div>
-                        <div class="d-grid mt-4">
-                            <button class="btn btn-sm btn-outline-primary">Search Venues</button>
-                        </div>
-                    </div>
-                    <div class="col-lg-9 p-4">
-                        <h6 class="text-muted mb-3">Showing 5 Prime Locations</h6>
-                        <ul class="list-group">
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Royal Palace Grandeur <span class="badge bg-success">Booked</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                The Lakeside Resort <span class="badge bg-warning text-dark">Shortlisted</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                City Convention Center <span class="badge bg-info">New Match</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            `
-        },
         default: {
             title: "Service Details",
             content: `<div class="p-5 text-center text-muted">Details for this service are coming soon!</div>`
@@ -110,70 +24,43 @@ document.addEventListener("DOMContentLoaded", function () {
     };
     
     
-    // --- MAIN FUNCTION TO OPEN SERVICE MODAL ---
-    const openServiceModal = (serviceId) => {
-        const serviceTemplate = templates[serviceId] || templates.default;
-        
-        serviceModalTitle.textContent = serviceTemplate.title;
-        serviceModalBody.innerHTML = serviceTemplate.content;
-
-        serviceModal.show();
-    };
-
-
-    // --- 1. EVENT LISTENERS FOR CARDS (Kept existing logic) ---
-    cards.forEach(card => {
-        card.addEventListener("click", function (e) {
-
-            // Handle GO button click (to open the service modal)
-            if (e.target.closest(".go-button")) {
-                e.stopPropagation(); 
-                const cardId = this.id;
-                openServiceModal(cardId);
-                return; 
-            }
-
-            // Handle Flip 
-            const isCurrentlyFlipped = this.classList.contains("flipped");
-            if (isCurrentlyFlipped) {
-                this.classList.remove("flipped");
-            } else {
-                unflipAllCards(this); 
-                this.classList.add("flipped");
-            }
-        });
-    });
+// --- MAIN FUNCTION TO OPEN SERVICE MODAL ---
+const openServiceModal = (serviceId) => {
+    // 1. Check if the card should redirect to a new page
+    if (serviceId === 'outfitCard') {
+        window.location.href = 'outfits/outfit.html';
+        return; // Exit function so modal doesn't open
+    }
     
-    // wedspage-script.js: Add this new section near the top, after the modal variables
+    // 2. Default Modal Logic for other cards
+    const serviceTemplate = templates[serviceId] || templates.default;
+    serviceModalTitle.textContent = serviceTemplate.title;
+    serviceModalBody.innerHTML = serviceTemplate.content;
+    serviceModal.show();
+};
 
-    // --- NEW: DUMMY DATA FOR DASHBOARD FEATURES ---
-    const dashboardData = {
-        // Feature 1: Progress Ring Data (Task completion status)
-        tasks: [
-            { name: "Book Venue", completed: true },
-            { name: "Finalize Date", completed: true },
-            { name: "Create Guest List", completed: false },
-            { name: "Book Photographer", completed: false },
-            { name: "Select Caterer", completed: true },
-            { name: "Buy Wedding Outfit", completed: false },
-            { name: "Send Invites", completed: false },
-            { name: "Finalize Event Schedule", completed: false },
-        ],
-        // Feature 2: Quick Alerts Data
-        alerts: [
-            { message: "Venue Deposit due in 5 days.", type: "danger", icon: "bi-exclamation-triangle-fill" },
-            { message: "RSVP deadline in 10 days.", type: "warning", icon: "bi-person-badge-fill" },
-            { message: "New vendor proposal received.", type: "info", icon: "bi-envelope-fill" },
-        ],
-        // Feature 3: Budget Snapshot Data (Using Indian Rupees placeholder for clarity)
-        budget: {
-            total: 3000000, // ₹30,00,000
-            spent: 1250000, // ₹12,50,000
+// --- EVENT LISTENERS FOR CARDS (Flip ability maintained) ---
+cards.forEach(card => {
+    card.addEventListener("click", function (e) {
+
+        // Handle GO button click
+        if (e.target.closest(".go-button")) {
+            e.stopPropagation(); 
+            const cardId = this.id; // This gets 'outfitCard', 'venueCard', etc.
+            openServiceModal(cardId);
+            return; 
         }
-    };
 
-
-    // --- NEW FUNCTIONS FOR DASHBOARD FEATURES ---
+        // Handle Flip (This part remains untouched)
+        const isCurrentlyFlipped = this.classList.contains("flipped");
+        if (isCurrentlyFlipped) {
+            this.classList.remove("flipped");
+        } else {
+            unflipAllCards(this); 
+            this.classList.add("flipped");
+        }
+    });
+});
 
     const formatCurrency = (amount) => {
     return new Intl.NumberFormat('en-IN', {
@@ -183,9 +70,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }).format(amount);
 };
 
-        // 1. Dynamic Progress Ring Logic
+    // 1. Dynamic Progress Ring Logic
     const updateProgressRing = () => {
-    // Replace with your real data logic
     const totalTasks = 25;
     const completedTasks = 16; 
     const progress = Math.round((completedTasks / totalTasks) * 100);
@@ -199,40 +85,10 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('tasksCompleted').textContent = `${completedTasks} / ${totalTasks}`;
 };
 
-// 3. Service Card Statuses (Feature 1 Detail)
-const updateServiceStatus = () => {
-    // --- SIMULATED DATA ---
-    // Replace this with real logic that checks if the card's service is planned/selected
-    const serviceStatuses = [
-        { name: "Outfits", status: "Selected", type: "success"},
-        { name: "Venue", status: "Booked", type: "success"},
-        { name: "Events", status: "Planning", type: "warning"},
-        { name: "Hotel", status: "Pending", type: "danger"},
-    ];
-    // ------------------------
 
-    const listContainer = document.getElementById('serviceStatusList');
-    listContainer.innerHTML = ''; // Clear loading text
-
-    serviceStatuses.forEach(item => {
-        const listItem = document.createElement('li');
-        listItem.className = 'd-flex align-items-center mb-2';
-        
-        // Define the color and icon based on the status type
-        const statusColorClass = `text-${item.type}`;
-        
-        listItem.innerHTML = `
-            <i class="bi ${item.icon} ${statusColorClass} me-2" style="font-size: 1.1rem;"></i>
-            <span class="fw-medium text-dark me-auto small">${item.name}:</span>
-            <span class="badge bg-${item.type} bg-opacity-75">${item.status}</span>
-        `;
-        listContainer.appendChild(listItem);
-    });
-};
 
 // 2. Budget Snapshot (Feature 2)
 const updateBudgetSnapshot = () => {
-    // Replace with your real data logic
     const totalBudget = 800000;
     const amountSpent = 450000;
     const remaining = totalBudget - amountSpent;
@@ -256,7 +112,6 @@ const updateBudgetSnapshot = () => {
 
 // 3. Alerts & Action Items (Feature 3)
 const updateAlerts = () => {
-    // Replace this array with your real alerts data fetched from an API
     const alertsData = [
         { type: 'danger', message: 'Photographer payment is due in 7 days.' },
         { type: 'warning', message: 'Venue contract review is pending.' },
@@ -288,7 +143,6 @@ const updateAlerts = () => {
 // 4. Timeline View Button Action (Feature 4)
 const setupTimelineButton = () => {
     document.getElementById('viewTimelineBtn').addEventListener('click', () => {
-        // Placeholder functionality: Replace this alert with a modal or page redirect
         alert("This button will open the full Event Timeline viewer! (Functionality is a placeholder.)");
     });
 };
@@ -298,7 +152,6 @@ const setupLogout = () => {
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', () => {
-            // In a real application, you would clear cookies/session here.
             console.log("User session cleared and redirected to homepage.");
             // The href="../index.html" handles the redirect.
         });
@@ -317,8 +170,7 @@ const setupFullBudgetButton = () => {
 };
 
 // WEDDING COUNTDOWN TIMER LOGIC ---
-// **CHANGE THIS DATE TO YOUR ACTUAL WEDDING DATE**
-const weddingDate = new Date("Dec 31, 2025 15:37:25").getTime();
+const weddingDate = new Date("Jan 31, 2026 15:37:25").getTime();
 
 const countdownElements = {
     days: document.getElementById('countdown-days'),
@@ -354,15 +206,75 @@ function updateCountdown() {
     }
 }
 
+// wedspage-script.js
+const updateDashboardProgress = async () => {
+    const user = JSON.parse(localStorage.getItem('loggedInUser'));
+    if (!user || !user.id) return;
+
+    try {
+        const response = await fetch(`https://vivaahplus-backend.onrender.com/api/wedspage/user-progress/${user.id}`);
+        const data = await response.json();
+
+        // 1. Update SVG Ring & Percentage Text
+        const percentageText = document.getElementById('progressPercentage');
+        const tasksCounter = document.getElementById('tasksCompleted');
+        const ringBar = document.getElementById('progressRingBar');
+
+        if (percentageText) percentageText.textContent = `${data.percentage}%`;
+        if (tasksCounter) tasksCounter.textContent = `${data.completedCount} / ${data.totalServices}`;
+        
+        if (ringBar) {
+            const radius = ringBar.r.baseVal.value;
+            const circumference = 2 * Math.PI * radius;
+            const offset = circumference - (data.percentage / 100) * circumference;
+            ringBar.style.strokeDashoffset = offset;
+        }
+
+        // 2. Logic for Badges (Matches your Old Image)
+        const updateStatusRow = (idPrefix, status) => {
+            const label = document.getElementById(`${idPrefix}StatusLabel`);
+            const dot = document.getElementById(`${idPrefix}Dot`);
+            
+            if (label && dot) {
+                if (status === 'completed') {
+                    label.innerText = 'Completed';
+                    label.className = 'status-badge bg-success text-white px-2 py-1 rounded-pill fw-bold';
+                    dot.style.color = 'green';
+                } else {
+                    label.innerText = 'Pending';
+                    label.className = 'status-badge bg-danger text-white px-2 py-1 rounded-pill fw-bold';
+                    dot.style.color = 'red';
+                }
+            }
+        };
+
+        // Call for each service
+        updateStatusRow('outfit', data.services.outfits);
+        updateStatusRow('venue', data.services.venue);
+        updateStatusRow('event', data.services.event);
+        updateStatusRow('hotel', data.services.hotel);
+
+    } catch (err) {
+        console.error("Sync error:", err);
+    }
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+    updateDashboardProgress();
+});
+
+updateDashboardProgress();
+
 // Run updateCountdown every 1 second
 updateCountdown(); // Initial call to prevent delay
 const countdownInterval = setInterval(updateCountdown, 1000);    
-    // --- INITIALIZE ALL DASHBOARD FEATURES ON LOAD ---
+
+// --- INITIALIZE ALL DASHBOARD FEATURES ON LOAD ---
     updateProgressRing();
-    updateServiceStatus();
     updateAlerts();
     updateBudgetSnapshot();
     setupTimelineButton();
     setupLogout();
     setupFullBudgetButton();
+    updateDashboardProgress();
 });
